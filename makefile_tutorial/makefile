@@ -14,6 +14,10 @@ file1:
 file2:
 	@touch file2
 
+blah:
+	cc -c blah.c -o blah.o
+
 .PHONY: clean
 clean:
 	-rm file1 file2 some_binary
+	-rm blah.o
