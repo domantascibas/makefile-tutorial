@@ -4,19 +4,19 @@ CC=g++
 # CFLAGS are compilation options
 CFLAGS=-c -Wall
 
-all: hello
+LDFLAGS=
+SOURCES=main.cpp hello.cpp factorial.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+EXECUTABLE=hello
 
-hello: main.o factorial.o hello.o
-	$(CC) main.cpp hello.cpp factorial.cpp -o hello
+all: $(SOURCES) $(EXECUTABLE)
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
-factorial.o: factorial.cpp
-	$(CC) $(CFLAGS) factorial.cpp
+.cpp.o:
+	$(CC) $(CFLAGS) $< -o $@
 
-hello.o: hello.cpp
-	$(CC) $(CFLAGS) hello.cpp
-
+.PHONY: clean
 clean:
-	rm *o
+	rm $(OBJECTS) $(EXECUTABLE)
