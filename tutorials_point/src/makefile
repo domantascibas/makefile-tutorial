@@ -2,8 +2,9 @@
 SHELL = /bin/sh
 
 # Directories
-IDIR = ../incl
-ODIR = obj
+IDIR = incl
+ODIR = build
+BDIR = bin
 
 # Compiler options
 CC = g++
@@ -18,21 +19,13 @@ DEPS = $(patsubst %, $(IDIR)/%, $(_DEPS))
 _OBJ = main.o factorial.o hello.o
 OBJ = $(patsubst %, $(ODIR)/%, $(_OBJ))
 
-hello: $(OBJ)
-	$(CC) $(CFLAGS) -o $@ $^ $(OBJ) $(LIBS)
-
 $(ODIR)/%.o: %.cpp $(DEPS)
 	@ mkdir -p $(ODIR)
-	$(CC) $(CFLAGS) -c $<
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-# hello: main.o factorial.o hello.o
-# 	$(CC) main.o factorial.o hello.o -o hello
-
-# main.o: main.cpp functions.h
-# 	$(CC) -c main.cpp
-
-# factorial.o: factorial.cpp functions.h
-# 	$(CC) -c factorial.cpp
+$(BDIR)/hello: $(OBJ)
+	@mkdir -p $(BDIR)
+	$(CC) $(CFLAGS) -o $@ $^ $(LIBS)
 
 .PHONY: install clean
 
@@ -40,4 +33,4 @@ install:
 	@echo You must be root to install
 
 clean:
-	-rm -f *.o hello core *.core
+	-rm -f $(ODIR)/*.o $(IDIR)/*~
