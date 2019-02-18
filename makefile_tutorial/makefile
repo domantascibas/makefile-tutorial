@@ -1,13 +1,15 @@
-objects = foo.o bar.o
+files = foo.elc bar.o lose.o
+src_files = foo.el bar.c lose.c
 
-all: $(objects)
+all: $(files)
 
-$(objects): %.o: %.c
-	@echo "make file" $@ "with prereqs" $<
+$(filter %.o, $(files)): %.o: %.c
+	@echo "target:" $@", prereq:" $<
+$(filter %.elc, $(files)): %.elc: %.el
+	@echo "target:" $@", prereq:" $<
 
 init:
-	@touch foo.c
-	@touch bar.c
+	@touch $(src_files)
 
 clean:
-	-rm foo.c bar.c
+	-rm $(src_files)
