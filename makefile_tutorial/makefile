@@ -6,6 +6,7 @@ files = file1 file2
 
 some_binary: $(files)
 	@echo "Look at this variable: " $(files)
+	@echo $$
 	@touch some_binary
 
 file1:
@@ -20,4 +21,4 @@ blah:
 .PHONY: clean
 clean:
 	-rm file1 file2 some_binary
-	-rm blah.o
+	-rm *.o
