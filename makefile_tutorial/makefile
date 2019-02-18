@@ -1,3 +1,6 @@
+# makefile can also be used to run shell commands
+# thus, tasks could be automated using makefiles
+
 files = foo.elc bar.o lose.o
 src_files = foo.el bar.c lose.c
 
