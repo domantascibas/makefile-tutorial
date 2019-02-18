@@ -14,6 +14,7 @@ _OBJ=hellomake.o hellofunc.o
 OBJ=$(patsubst %,$(ODIR)/%,$(_OBJ))
 
 $(ODIR)/%.o: %.c $(DEPS)
+	@ mkdir -p $(ODIR)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 hellomake: $(OBJ)
@@ -22,4 +23,4 @@ hellomake: $(OBJ)
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(IDIR)/*~
+	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
