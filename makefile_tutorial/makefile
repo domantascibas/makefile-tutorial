@@ -2,7 +2,7 @@
 # In this example, if clean is created, make clean will still be run.
 # PHONY is great to use, but I'll skip it in the rest of the examples for simplicity.
 
-wrong = *.o
+wrong = *.o	# wrong use. prints '*.o' instead of file names
 objects := $(wildcard *.c)
 
 some_binary:
